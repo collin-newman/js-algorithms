@@ -25,7 +25,7 @@ var rockPaperScissors = function () {
   for (let j = 0; j < 3; j++) {
     for (let i = 0; i < 3; i++) {
       while (array[2] < 3) {
-        results.push([obj[array[0]], obj[array[1]], obj[array[2]]]);
+        results.push([obj[array[0]] + obj[array[1]] + obj[array[2]]]);
         array[2]++;
       }
       array[2] = 0;
