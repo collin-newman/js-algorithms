@@ -23,9 +23,7 @@ var evenOccurrence = function(arr) {
     }
   })
 
-  if (Object.keys(evens).length === 0) {
-    return null;
-  }
+  let evens = {};
 
   for (let key in counterObj) {
     if (counterObj[key].occurrence % 2 === 0) {
@@ -33,6 +31,9 @@ var evenOccurrence = function(arr) {
     }
   }
 
+  if (Object.keys(evens).length === 0) {
+    return null;
+  }
 
 
   let values = Object.values(evens);
