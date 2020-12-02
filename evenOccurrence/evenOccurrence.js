@@ -31,8 +31,10 @@ var evenOccurrence = function(arr) {
     }
   }
 
+
   let values = Object.values(evens);
-  let result = values.sort((a, b) => a.occurrence - b.occurrence);
+
+  let result = values.sort(function(a, b) {return a.arrayPos - b.arrayPos});
 
   return arr[result[0].arrayPos];
 };
