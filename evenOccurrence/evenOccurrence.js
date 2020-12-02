@@ -23,13 +23,16 @@ var evenOccurrence = function(arr) {
     }
   })
 
-  let evens = {};
+  if (Object.keys(evens).length === 0) {
+    return null;
+  }
 
   for (let key in counterObj) {
     if (counterObj[key].occurrence % 2 === 0) {
       evens[key] = counterObj[key];
     }
   }
+
 
 
   let values = Object.values(evens);
