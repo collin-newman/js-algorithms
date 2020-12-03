@@ -77,7 +77,7 @@ var makeHashTable = function() {
     }
   };
 
-  result.resize(factor) {
+  result.resize = function(factor) {
     let oldEntries = [];
     for (let bucket = 0; bucket < result.storage.length; bucket++) {
       for (let entry = 0; entry < result.storage[bucket].length; entry++) {
