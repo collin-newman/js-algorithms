@@ -22,24 +22,76 @@ var getIndexBelowMaxForKey = function(str, max) {
 
 var makeHashTable = function() {
   var result = {};
-  var storage = [];
-  var storageLimit = 4;
-  var size = 0;
-  
-  result.insert = function(/*...*/ 
-) {
-    // TODO: implement `insert`
+  result.storage = [];
+  result.storageLimit = 4;
+  result.size = 0;
+  result.buckets = 0;
+  result.loadFactor = size / buckets;
+
+  result.insert = function(k, v) {
+    let index = getIndexBelowMaxForKey(k);
+
+    if (Array.isArray(storage[index]) === false) {
+      storage[index] = [];
+      result.buckets++;
+      result.loadFactor = result.size / result.buckets;
+    }
+
+    if (result.loadFactor < 0.75) {
+      result.storage[index].push([k, v]);
+      result.size++;
+      result.loadFactor = result.size / result.buckets;
+    } else {
+      result.resize(2);
+      result.insert(k, v);
+    }
   };
 
-  result.retrieve = function(/*...*/ 
-) {
-    // TODO: implement `retrieve`
+  result.retrieve = function(k) {
+    let index = getIndexBelowMaxForKey(k);
+
+    for (let i = 0; i < result.storage[index].length; i++) {
+      if (result.storage[index][i][0] === k) {
+        return result.storage[index][i][1];
+      }
+    }
   };
 
-  result.remove = function(/*...*/ 
-) {
-    // TODO: implement `remove`
+  result.remove = function(k) {
+    index = getIndexBelowMaxForKey(k);
+
+    for (let i = 0; i < result.storage[index].length; i++) {
+      if (result.storage[index][i][0] === k) {
+        let removedEntry = result.storage[index].splice(i, 1);
+        result.size--;
+        if (result.storage[index].length === 0) {
+          result.storage[index] = undefined;
+          result.buckets--;
+        }
+        result.loadFactor = result.size / result.buckets;
+        if (loadFactor < 0.25) {
+          result.resize(0.5);
+        }
+        return removedEntry;
+      }
+    }
   };
+
+  result.resize(factor) {
+    let oldEntries = [];
+    for (let bucket = 0; bucket < result.storage.length; bucket++) {
+      for (let entry = 0; entry < result.storage[bucket].length; entry++) {
+        oldEntries.push(result.storage[bucket][entry]);
+      }
+    }
+
+    result.storageLimit *= factor;
+    result.storage = [];
+
+    for (let i = 0; i < oldEntries.length; i++) {
+      result.insert(oldEntries[i]);
+    }
+  }
 
   return result;
 };
