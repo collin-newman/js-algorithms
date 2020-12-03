@@ -26,7 +26,7 @@ var makeHashTable = function() {
   result.storageLimit = 4;
   result.size = 0;
   result.buckets = 0;
-  result.loadFactor = size / buckets;
+  result.loadFactor = result.size / result.buckets;
 
   result.insert = function(k, v) {
     let index = getIndexBelowMaxForKey(k);
