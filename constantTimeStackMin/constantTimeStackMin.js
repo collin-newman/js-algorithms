@@ -18,28 +18,28 @@
   * Stack Class
   */
 
-class Stack {
+ class Stack {
   constructor() {
     this.storage = {};
     this.size = 0;
-    this.storage.min = undefined;
+    this.min = undefined;
   }
 
+  // add an item to the top of the stack
   push(value) {
     if (this.storage[0] === undefined) {
       this.storage[0] = value;
-      this.storage.min = value;
+      this.min = value;
       this.size++;
     } else {
       this.storage[this.size] = value;
-      console.log(this.storage[this.size], this.storage.min);
-      if (this.storage[this.size] < this.storage.min) {
-        this.storage.min = this.storage[this.size];
+      if (this.storage[this.size] < this.min) {
+        this.min = this.storage[this.size];
       }
       this.size++
     }
   }
-
+  // remove an item from the top of the stack
   pop() {
     let removed = this.storage[this.size - 1];
     this.storage[this.size - 1] = undefined;
@@ -47,13 +47,13 @@ class Stack {
     return removed;
   }
 
+  // return the number of items in the stack
   getSize() {
     return this.size;
   }
 
+  // return the minimum value in the stack
   getMin() {
-    return this.storage.min;
+    return this.min;
   }
-};
-
-
+}
