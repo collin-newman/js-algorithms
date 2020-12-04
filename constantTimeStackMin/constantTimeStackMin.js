@@ -21,39 +21,39 @@
  class Stack {
   constructor() {
     this.storage = {};
-    this.size = 0;
-    this.min = undefined;
+    this.stackSize = 0;
+    this.stackMin = undefined;
   }
 
   // add an item to the top of the stack
   push(value) {
     if (this.storage[0] === undefined) {
       this.storage[0] = value;
-      this.min = value;
-      this.size++;
+      this.stackMin = value;
+      this.stackSize++;
     } else {
-      this.storage[this.size] = value;
-      if (this.storage[this.size] < this.min) {
-        this.min = this.storage[this.size];
+      this.storage[this.stackSize] = value;
+      if (this.storage[this.stackSize] < this.stackMin) {
+        this.stackMin = this.storage[this.stackSize];
       }
-      this.size++
+      this.stackSize++
     }
   }
   // remove an item from the top of the stack
   pop() {
-    let removed = this.storage[this.size - 1];
-    this.storage[this.size - 1] = undefined;
-    this.size--;
+    let removed = this.storage[this.stackSize - 1];
+    this.storage[this.stackSize - 1] = undefined;
+    this.stackSize--;
     return removed;
   }
 
   // return the number of items in the stack
-  getSize() {
-    return this.size;
+  size() {
+    return this.stackSize;
   }
 
   // return the minimum value in the stack
-  getMin() {
-    return this.min;
+  min() {
+    return this.stackMin;
   }
 }
