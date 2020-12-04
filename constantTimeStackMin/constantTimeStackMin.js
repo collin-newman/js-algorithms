@@ -44,6 +44,14 @@
     let removed = this.storage[this.stackSize - 1];
     this.storage[this.stackSize - 1] = undefined;
     this.stackSize--;
+    if (removed === this.storageMin) {
+      this.storageMin = Infinity;
+      for (key in this.storage) {
+        if (this.storage[key] < this.storageMin) {
+          this.storageMin = this.storage[key];
+        }
+      }
+    }
     return removed;
   }
 
