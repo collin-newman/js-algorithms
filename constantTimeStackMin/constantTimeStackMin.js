@@ -30,7 +30,6 @@
     if (this.storage[0] === undefined) {
       this.storage[0] = value;
       this.stackMin = value;
-      console.log(this.stackMin, value);
       this.stackSize++;
     } else {
       this.storage[this.stackSize] = value;
@@ -43,17 +42,17 @@
   // remove an item from the top of the stack
   pop() {
     let removed = this.storage[this.stackSize - 1];
-    this.storage[this.stackSize - 1] = undefined;
+    delete this.storage[this.stackSize - 1];
     this.stackSize--;
-    console.log(removed, this.storageMin);
-    if (removed === this.storageMin) {
-      this.storageMin = Infinity;
-      for (key in this.storage) {
-        if (this.storage[key] < this.storageMin) {
-          this.storageMin = this.storage[key];
+    if (removed === this.stackMin) {
+      this.stackMin = Infinity;
+      for (let key in this.storage) {
+        if (this.storage[key] < this.stackMin) {
+          this.stackMin = this.storage[key];
         }
       }
     }
+
     return removed;
   }
 
