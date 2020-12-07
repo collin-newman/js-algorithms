@@ -35,4 +35,23 @@
 
 var bubbleSort = function(array) {
   // Your code here.
+  let sorted = false;
+  let cycles = 0;
+  while (!sorted) {
+    let swaps = 0;
+    for (let i = 0; i < array.length - 1; i++) {
+      if (array[i] > array[i + 1]) {
+        let oldArrI = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = oldArrI;
+        swaps++;
+      }
+    }
+    cycles++;
+    if (swaps === 0) {
+      sorted = true;
+      console.log(cycles);
+      return array;
+    }
+  }
 };
