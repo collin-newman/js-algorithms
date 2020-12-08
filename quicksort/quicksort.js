@@ -18,14 +18,18 @@ var quicksort = function(array) {
   } else if (array.length === 0) {
     return;
   }
-  let pivot = array[Math.floor(array.length / 2)];
+  let pivot = [];
+  let pivotVal = array[Math.floor(array.length / 2)];
   let leftPartition = [];
   let rightPartition = [];
+
   array.forEach(item => {
-    if (item < pivot) {
+    if (item < pivotVal) {
       leftPartition.push(item);
-    } else if (item > pivot) {
+    } else if (item > pivotVal) {
       rightPartition.push(item);
+    } else if (item === pivotVal) {
+      pivot.push(item);
     }
   })
 
