@@ -37,6 +37,8 @@ var quicksort = function(array) {
       return [].concat(pivot, quicksort(rightPartition));
   } else if (rightPartition.length === 0) {
       return [].concat(quicksort(leftPartition), pivot);
+  } else if (pivot.length === 0) {
+      return [].concat(quicksort(leftPartition), quicksort(rightPartition));
   }
 
   return [].concat(quicksort(leftPartition), pivot, quicksort(rightPartition));
