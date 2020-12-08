@@ -12,4 +12,28 @@
 
 
 var quicksort = function(array) {
+
+  if (array.length === 1) {
+    return array[0];
+  } else if (array.length === 0) {
+    return;
+  }
+  let pivot = array[Math.floor(array.length / 2)];
+  let leftPartition = [];
+  let rightPartition = [];
+  array.forEach(item => {
+    if (item < pivot) {
+      leftPartition.push(item);
+    } else if (item > pivot) {
+      rightPartition.push(item);
+    }
+  })
+
+  if (leftPartition.length === 0) {
+      return [].concat(pivot, quicksort(rightPartition));
+  } else if (rightPartition.length === 0) {
+      return [].concat(quicksort(leftPartition), pivot);
+  }
+
+  return [].concat(quicksort(leftPartition), pivot, quicksort(rightPartition));
 };
