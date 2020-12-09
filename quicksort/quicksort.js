@@ -16,7 +16,7 @@ var quicksort = function(array) {
   if (array.length === 1) {
     return array[0];
   } else if (array.length === 0) {
-    return;
+    return [];
   }
   let pivot = [];
   let pivotVal = array[Math.floor(array.length / 2)];
@@ -33,13 +33,6 @@ var quicksort = function(array) {
     }
   })
 
-  if (leftPartition.length === 0) {
-      return [].concat(pivot, quicksort(rightPartition));
-  } else if (rightPartition.length === 0) {
-      return [].concat(quicksort(leftPartition), pivot);
-  } else if (pivot.length === 0) {
-      return [].concat(quicksort(leftPartition), quicksort(rightPartition));
-  }
 
   return [].concat(quicksort(leftPartition), pivot, quicksort(rightPartition));
 };
