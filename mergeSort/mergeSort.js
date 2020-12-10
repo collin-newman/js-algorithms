@@ -94,7 +94,31 @@
  *   Implement natural splitting into your mergesort. How much does it improve your average-case runtime?
  *
  */
-import quicksort from './quicksort/quicksort.js';
+var quicksort = function(array) {
+
+  if (array.length === 1) {
+    return array[0];
+  } else if (array.length === 0) {
+    return [];
+  }
+  let pivot = [];
+  let pivotVal = array[Math.floor(array.length / 2)];
+  let leftPartition = [];
+  let rightPartition = [];
+
+  array.forEach(item => {
+    if (item < pivotVal) {
+      leftPartition.push(item);
+    } else if (item > pivotVal) {
+      rightPartition.push(item);
+    } else if (item === pivotVal) {
+      pivot.push(item);
+    }
+  })
+
+
+  return [].concat(quicksort(leftPartition), pivot, quicksort(rightPartition));
+};
 
 
 var mergeSort = function(array) {
