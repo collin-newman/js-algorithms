@@ -52,19 +52,26 @@ var insertionSort = function(array) {
     if (sortedArr.length === 0) {
       sortedArr.push(unsortedItem);
     } else {
-      let index = 0;
-      for (let sortedItem of sortedArr) {
-        index++;
-        if (unsortedItem.value > sortedItem.value) {
-          continue
-        } else if (unsortedItem.value === sortedItem.value) {
-          if (unsortedItem.order > sortedItem.order) {
-            continue;
-          }
-        } else {
-          sortedArr.splice(index, 0, unsortedItem);
+
+      let insert = function(arr, index) {
+        if (arr[index] === undefined) {
+          sortedArr.unshift(unsortedItem);
+          return;
         }
+        if (unsortedItem.value > sortedArr[index].value) {
+          sortedArr.splice(index + 1, 0, unsortedItem);
+          return;
+        }
+        if (unsortedItem.value === sortedArr[index].value) {
+          if (unsortedItem.order > sortedArr[index].order) {
+            sortedArr.splice(index + 1, 0, unsortedItem);
+            return;
+          }
+        }
+        insert(sortedArr, index - 1);
       }
+
+      insert(sortedArr, sortedArr.length - 1);
     }
   }
 
