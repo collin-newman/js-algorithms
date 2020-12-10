@@ -102,14 +102,19 @@ var mergeSort = function(array) {
     return array;
   }
   if (array.length === 2) {
-    return quicksort(array);
+    if (array[0] < array[1]) {
+      return array;
+    } else {
+      return quicksort(array);
+    }
   }
 
   if (array.length !== 1 && array.length !== 0) {
     let middle = Math.floor(array.length / 2);
-    let left = mergeSort(array.splice(0, middle));
-    let right = mergeSort(array);
+    let left = mergeSort(array.slice(0, middle));
+    let right = mergeSort(array.slice(middle));
 
-    return quicksort(left.concat(right));
+    array = quicksort(left.concat(right))
+    return array;
   }
 };
