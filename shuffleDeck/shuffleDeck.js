@@ -31,22 +31,22 @@
  *   See https://www.dartmouth.edu/~chance/teaching_aids/books_articles/Mann.pdf .
  */
 
-var shuffleDeck = function(deck) {
-  let result = [];
+// var shuffleDeck = function(deck) {
+//   let result = [];
 
-  let remove = function(arr, randomIndex) {
-    if (arr.length === 0) {
-      return;
-    }
-    let removed = arr[randomIndex];
-    result.push(removed);
-    arr.splice(randomIndex, 1);
-    randomIndex = Math.floor(Math.random() * (arr.length - 1));
-    remove(arr, randomIndex);
-  }
-  remove(deck, Math.floor(Math.random() * (deck.length - 1)));
-  return result;
-};
+//   let remove = function(arr, randomIndex) {
+//     if (arr.length === 0) {
+//       return;
+//     }
+//     let removed = arr[randomIndex];
+//     result.push(removed);
+//     arr.splice(randomIndex, 1);
+//     randomIndex = Math.floor(Math.random() * (arr.length - 1));
+//     remove(arr, randomIndex);
+//   }
+//   remove(deck, Math.floor(Math.random() * (deck.length - 1)));
+//   return result;
+// };
 
 // Ordered deck generator provided for your testing convenience
 // (You may alter this function, but an unaltered copy will be used for tests.)
@@ -62,4 +62,36 @@ var orderedDeck = function() {
   });
 
   return deck;
+};
+
+var shuffleDeck = function(deck) {
+  let shuffled = [];
+
+  let indexes = {
+    deckIndexes: [],
+    shuffledIndexes: []
+  };
+
+  for (let i = 0; i < deck.length; i++) {
+    indexes.deckIndexes.push(i);
+    indexes.shuffledIndexes.push(i);
+    shuffled.push({'FREE': i});
+  }
+
+  let recursor = function(arr) {
+    if (arr.length === 0) {
+      return;
+    }
+    console.log(JSON.stringify(indexes.deckIndexes));
+    let randomDeckIndex = Math.floor(Math.random() * indexes.deckIndexes.length);
+    let randomShuffledIndex = Math.floor(Math.random() * indexes.shuffledIndexes.length);
+    shuffled[randomShuffledIndex] = deck[randomDeckIndex];
+    indexes.deckIndexes.splice(randomDeckIndex, 1);
+    indexes.shuffledIndexes.splice(randomShuffledIndex, 1);
+    recursor(indexes.deckIndexes);
+  }
+
+  recursor(indexes.deckIndexes);
+
+  return shuffled;
 };
