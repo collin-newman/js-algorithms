@@ -32,7 +32,20 @@
  */
 
 var shuffleDeck = function(deck) {
-  // Your code here
+  let result = [];
+
+  let remove = function(arr, randomIndex) {
+    if (arr.length === 0) {
+      return;
+    }
+    let removed = arr[randomIndex];
+    result.push(removed);
+    arr.splice(randomIndex, 1);
+    randomIndex = Math.floor(Math.random() * (arr.length - 1));
+    remove(arr, randomIndex);
+  }
+  remove(deck, Math.floor(Math.random() * (deck.length - 1)));
+  return result;
 };
 
 // Ordered deck generator provided for your testing convenience
