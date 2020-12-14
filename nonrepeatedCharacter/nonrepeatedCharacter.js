@@ -7,19 +7,18 @@
  */
 var firstNonRepeatedCharacter = function(string) {
   let tracker = {};
+  if (string.length === 0) { return null; }
 
   for (let index = 0; index < string.length; index++) {
     if (tracker[string[index]] === undefined) {
       tracker[string[index]] = {count: 1, index: index, character: string[index]};
     } else {
-      tracker[string[index]].count++;
+      delete tracker[string[index]];
     }
   }
-  let uniques = Object.values(tracker).filter((char) => (
-    char.count === 1
-  ));
-  let sortedUniques = uniques.sort((a, b) => (
+  let sortedUniques = Object.values(tracker).sort((a, b) => (
     a.index < b.index
   ))
-  return sortedUniques[0].character;
+
+  return sortedUniques[0] ? sortedUniques[0].character : null;
 };
