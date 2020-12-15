@@ -27,7 +27,7 @@
 
   let recursor = function(head, tail) {
     console.log('Head', head, 'Tail', tail)
-    if (tail.length === 1 || tail === undefined) { return; }
+    if (tail === undefined || tail.length === 1) { return; }
 
     for (let i = 0; i < tail.length; i++) {
       tail = shift(tail);
