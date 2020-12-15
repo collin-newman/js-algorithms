@@ -12,6 +12,32 @@
   * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
   */
 
-var allAnagrams = function(string) {
+ var allAnagrams = function(inputString) {
   // Your code here.
+  let anagrams = [];
+  let shift = function(string) {
+    let characters = string.split('');
+    if (characters.length <= 1) {
+      return string;
+    }
+    let head = characters.shift();
+    characters.push(head);
+    return characters.join('');
+  }
+
+  let recursor = function(head, tail) {
+    console.log('Head', head, 'Tail', tail)
+    if (tail.length === 1 || tail === undefined) { return; }
+
+    for (let i = 0; i < tail.length; i++) {
+      tail = shift(tail);
+      anagrams.push(head + tail);
+      recursor(head + tail[0], tail.slice(1, tail.length));
+    }
+    recursor(head + tail[0], tail.slice[1, tail.length]);
+  }
+
+  recursor(inputString[0], inputString.slice(1, inputString.length));
+
+  return anagrams;
 };
