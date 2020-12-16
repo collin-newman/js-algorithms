@@ -50,11 +50,11 @@ var telephoneWords = function(digitString) {
   let group3 = phoneDigitsToLetters[digitString[3]].split('');
   let permutations = [];
 
-  group0.forEach((g1Letter) => {
-    group1.forEach((g2Letter) => {
-      group3.forEach((g3Letter) => {
-        group4.forEach((g4Letter) => {
-          perumations.push(g1Letter + g2Letter + g3Letter + g4Letter);
+  group0.forEach((g0Letter) => {
+    group1.forEach((g1Letter) => {
+      group2.forEach((g2Letter) => {
+        group3.forEach((g3Letter) => {
+          permutations.push(g0Letter + g1Letter + g2Letter + g3Letter);
         })
       })
     })
