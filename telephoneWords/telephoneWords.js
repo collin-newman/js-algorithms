@@ -43,4 +43,20 @@ var phoneDigitsToLetters = {
 
 var telephoneWords = function(digitString) {
   // TODO: return every combination that can be spelled on a phone with these digits
+  let group0 = phoneDigitsToLetters[digitString[0]].split('');
+  let group1 = phoneDigitsToLetters[digitString[1]].split('');
+  let group2 = phoneDigitsToLetters[digitString[2]].split('');
+  let group3 = phoneDigitsToLetters[digitString[3]].split('');
+  let permutations = [];
+
+  group0.forEach((g1Letter) => {
+    group1.forEach((g2Letter) => {
+      group3.forEach((g3Letter) => {
+        group4.forEach((g4Letter) => {
+          perumations.push(g1Letter + g2Letter + g3Letter + g4Letter);
+        })
+      })
+    })
+  })
+  return permutations;
 };
