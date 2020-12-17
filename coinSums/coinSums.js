@@ -25,6 +25,25 @@ makeChange(2) === 2
 */
 
 var makeChange = function(total) {
+  let combos = [];
+  let getLargestCoin = function (num) {
+    let coins = [200, 100, 50, 20, 10, 5, 2, 1];
+
+    coins.forEach((coin) => {
+      if (num - coin > 0) {
+        return coin;
+      }
+    })
+  };
+
+  let largestCoin = getLargestCoin(total);
+  let currentCombo = [];
+  currentCombo.push(largestCoin);
+  while (total - largestCoin > 0) {
+    currentCombo.push(largestCoin);
+  }
+
+
 
 };
 
