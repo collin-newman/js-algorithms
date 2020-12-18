@@ -20,6 +20,26 @@
 var powerSet = function(str) {
   let results = [str, ''];
 
+  let checkForDuplicates = function(str) {
+    if (results.includes(str)) { return true; }
+
+    for (let i = 0; i < results.length; i++) {
+      if (results[i].length !== str.length) {
+        return false;
+      }
+      let occurances = 0;
+      for (let j = 0; j < str.length; j++) {
+        if (results[i].includes(str[j])) {
+          occurances++;
+        }
+      }
+      if (occurances === str.length || occurances === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   let findSet = function(string) {
 
     for (let i = 0; i < string.length; i++) {
@@ -34,7 +54,7 @@ var powerSet = function(str) {
       for (let j = 0; j < tail.length - 1; j++) {
         set += tail[j];
       }
-      if (!results.includes(set)) {
+      if (!checkForDuplicates(set)) {
         results.push(set);
       }
       if (head.length !== set.length) {
@@ -47,5 +67,3 @@ var powerSet = function(str) {
 
   return results;
 };
-
-powerSet('jump');
