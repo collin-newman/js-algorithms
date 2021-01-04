@@ -42,9 +42,12 @@ Tree.prototype.DFSelect = function(filter) {
     results.push(this.value);
   }
   let recursor = (node) => {
-    depth++;
-    let filtered = node.children.filter((child) => {
-      return filter(child.value, depth);
+    let childrenWithDepth = node.children;
+    childrenWithDepth.forEach(item => {
+      item.depth = node.depth + 1;
+    })
+    let filtered = childrenWithDepth.filter((child) => {
+      return filter(child.value, child.depth);
     });
     filtered.forEach((item) => {
       results.push(item.value);
@@ -53,7 +56,9 @@ Tree.prototype.DFSelect = function(filter) {
       recursor(node.children[i]);
     }
   }
-  recursor(this);
+  let initialNode = this;
+  initialNode.depth = 0;
+  recursor(initialNode);
   return results;
 };
 
