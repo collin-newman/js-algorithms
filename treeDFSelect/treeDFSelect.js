@@ -36,6 +36,25 @@ var Tree = function(value) {
 };
 
 Tree.prototype.DFSelect = function(filter) {
+  let results = [];
+  let depth = 0;
+  if (filter(this.value, depth)) {
+    results.push(this.value);
+  }
+  let recursor = (node) => {
+    depth++;
+    let filtered = node.children.filter((child) => {
+      return filter(child.value, depth);
+    });
+    filtered.forEach((item) => {
+      results.push(item.value);
+    })
+    for (let i = 0; i < node.children.length; i++) {
+      recursor(node.children[i]);
+    }
+  }
+  recursor(this);
+  return results;
 };
 
 
