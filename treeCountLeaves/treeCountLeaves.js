@@ -16,15 +16,15 @@
   * * <- leaf
   *
   * Example usage:
-  *   var root = new Tree();
-  *   root.countLeaves(); // 1
-  *   root.addChild(new Tree());
-  *   root.countLeaves(); // still 1
-  *   root.addChild(new Tree());
-  *   root.children[0].addChild(new Tree());
-  *   root.children[0].addChild(new Tree());
-  *   root.children[0].children[0].addChild(new Tree());
-  *   root.countLeaves(); // 3
+var root = new Tree();
+root.countLeaves(); // 1
+root.addChild(new Tree());
+root.countLeaves(); // still 1
+root.addChild(new Tree());
+root.children[0].addChild(new Tree());
+root.children[0].addChild(new Tree());
+root.children[0].children[0].addChild(new Tree());
+root.countLeaves(); // 3
   *
   */
 
@@ -38,7 +38,15 @@ var Tree = function(value) {
 };
 
 Tree.prototype.countLeaves = function () {
-  // TODO: implement me!
+  let sum = 0;
+  if (this.children.length === 0) {
+    sum = 1;
+  } else {
+    for (let i = 0; i < this.children.length; i++) {
+      sum += this.children[i].countLeaves();
+    }
+  }
+  return sum;
 };
 
 /**
