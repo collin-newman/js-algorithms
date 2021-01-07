@@ -85,5 +85,9 @@
     return equal;
   };
 
+  //edge case
+  if (Object.keys(apple).length === 0 || Object.keys(orange).length === 0) {
+    return false;
+  }
   return checkObject(apple, orange);
 };
