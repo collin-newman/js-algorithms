@@ -7,21 +7,21 @@
   * for which the filter returns true.
   *
   * Example:
-  *   var root1 = new Tree(1);
-  *   var branch2 = root1.addChild(2);
-  *   var branch3 = root1.addChild(3);
-  *   var leaf4 = branch2.addChild(4);
-  *   var leaf5 = branch2.addChild(5);
-  *   var leaf6 = branch3.addChild(6);
-  *   var leaf7 = branch3.addChild(7);
-  *   root1.DFSelect(function (value, depth) {
-  *     return value % 2;
-  *   })
+var root1 = new Tree(1);
+var branch2 = root1.addChild(2);
+var branch3 = root1.addChild(3);
+var leaf4 = branch2.addChild(4);
+var leaf5 = branch2.addChild(5);
+var leaf6 = branch3.addChild(6);
+var leaf7 = branch3.addChild(7);
+root1.DFSelect(function (value, depth) {
+  return value % 2;
+})
   *   // [1, 5, 3, 7]
   *
-  *   root1.DFSelect(function (value, depth) {
-  *     return depth === 1;
-  *   })
+root1.DFSelect(function (value, depth) {
+  return depth === 1;
+})
   *   // [2, 3]
   *
   */
@@ -37,28 +37,17 @@ var Tree = function(value) {
 
 Tree.prototype.DFSelect = function(filter) {
   let results = [];
-  let depth = 0;
-  if (filter(this.value, depth)) {
-    results.push(this.value);
-  }
-  let recursor = (node) => {
-    let childrenWithDepth = node.children;
-    childrenWithDepth.forEach(item => {
-      item.depth = node.depth + 1;
-    })
-    let filtered = childrenWithDepth.filter((child) => {
-      return filter(child.value, child.depth);
-    });
-    filtered.forEach((item) => {
-      results.push(item.value);
-    })
+
+  let testFilter = (node) => {
+    if (filter(node.value)) {
+      results.push(node.value);
+    }
     for (let i = 0; i < node.children.length; i++) {
-      recursor(node.children[i]);
+      testFilter(node.children[i]);
     }
   }
-  let initialNode = this;
-  initialNode.depth = 0;
-  recursor(initialNode);
+
+  testFilter(this);
   return results;
 };
 
