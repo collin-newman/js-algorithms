@@ -37,13 +37,19 @@ var Tree = function(value) {
 
 Tree.prototype.DFSelect = function(filter) {
   let results = [];
+  let depth = 0;
+  if (filter === undefined) {
+    filter = (value) => (value);
+  }
 
   let testFilter = (node) => {
-    if (filter(node.value)) {
+    if (filter(node.value, depth)) {
       results.push(node.value);
     }
     for (let i = 0; i < node.children.length; i++) {
+      depth++;
       testFilter(node.children[i]);
+      depth--;
     }
   }
 
