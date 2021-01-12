@@ -39,4 +39,17 @@
 
 
 var asyncMap = function(tasks, callback) {
+  let results = [];
+
+  tasks.forEach(fn => {
+    results.push(new Promise((resolve, reject) => {
+      fn(result => {
+        resolve(result);
+      });
+    }))
+  });
+
+  Promise.all(results)
+    .then(callback(results))
+    .catch(err => console.log(err));
 };
