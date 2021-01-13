@@ -45,7 +45,7 @@ var compose = function(...cbs) {
   }
 };
 
-var pipe = function() {
+var pipe = function(...cbs) {
   let callbackList = cbs;
   return function(value) {
     let result = callbackList[0](value);
