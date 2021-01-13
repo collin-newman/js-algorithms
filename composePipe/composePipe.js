@@ -33,17 +33,17 @@
 
 'use strict';
 
-var compose = function(...cbs) {
-  let callbackList = cbs;
-  return function(value) {
-    let result = callbackList[callbackList.length - 1](value);
-    console.log(result);
-    for (let i = callbackList.length - 2; i > -1; i--) {
-      result = callbackList[i](result);
-    }
-    return result;
-  }
-};
+// var compose = function(...cbs) {
+//   let callbackList = cbs;
+//   return function(value) {
+//     let result = callbackList[callbackList.length - 1](value);
+//     console.log(result);
+//     for (let i = callbackList.length - 2; i > -1; i--) {
+//       result = callbackList[i](result);
+//     }
+//     return result;
+//   }
+// };
 
 var pipe = function(...cbs) {
   let callbackList = cbs;
@@ -55,3 +55,18 @@ var pipe = function(...cbs) {
     return result;
   }
 };
+
+
+var compose = (...functions) => {
+  return (value) => {
+    return functions.reduce((acc, currentVal) => (
+      currentVal(acc)
+    ), functions.reverse()[0](value))
+  }
+}
+
+
+
+// var pipe = (...functions) => {
+//   return (value) =>  (compose(functions.reverse())(value));
+// }
