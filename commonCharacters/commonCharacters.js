@@ -16,11 +16,18 @@ var commonCharacters = function(string1, ...strings) {
   let result = '';
   let exculsions = [' ']
   for (let i = 0; i < string1.length; i++) {
+    let contains = false;
     for (let j = 0; j < strings.length; j++) {
       if (strings[j].includes(string1[i]) && !exculsions.includes(string1[i])) {
-        result += string1[i];
-        exculsions.push(string1[i]);
+        continue;
+      } else {
+        contains = true;
+        break;
       }
+    }
+    if (!contains) {
+      result += string1[i];
+      exculsions.push(string1[i]);
     }
   }
   return result;
