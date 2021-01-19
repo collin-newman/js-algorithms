@@ -10,7 +10,7 @@
  * parent of the 3rd and 4th nodes, and the 2nd node will be the parent of the 5th and
  * 6th nodes. In a specific kind of binary heap, the binary min heap, every node is
  * less than its immediate children:
- * 
+ *
  *          0
  *     1         2
  *   3   4     5   6
@@ -67,21 +67,25 @@
 // and then iteratively returns the root of the `BinaryHeap` until its empty, thus returning a sorted array.
 
 
-function BinaryHeap () {
-  this._heap = [];
-  // this compare function will result in a minHeap, use it to make comparisons between nodes in your solution
-  this._compare = function (i, j) { return i < j };
-}
+class BinaryHeap {
+  constructor() {
+    this._heap = [];
+  }
+  getRoot() {
+    return this._heap[0];
+  }
+  insert(value) {
+    this._heap.push(value);
+    let index = this._heap.length;
+    while (value < this._heap[Math.floor((index - 1) /2)]) {
+      let oldVal = this._heap[Math.floor((index - 1) /2)];
+      this._heap[Math.floor((index - 1) /2)] = value;
+      this._heap[index] = oldVal;
+      index = this._heap.indexOf(value);
+    }
+    return this._heap;
+  }
+  remove() {
 
-// This function works just fine and shouldn't be modified
-BinaryHeap.prototype.getRoot = function () {
-  return this._heap[0];
-}
-
-BinaryHeap.prototype.insert = function (value) {
-  // TODO: Your code here
-}
-
-BinaryHeap.prototype.removeRoot = function () {
-  // TODO: Your code here
+  }
 }
