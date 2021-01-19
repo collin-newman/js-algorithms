@@ -76,7 +76,7 @@ class BinaryHeap {
   }
   insert(value) {
     this._heap.push(value);
-    let index = this._heap.length;
+    let index = this._heap.length - 1;
     while (value < this._heap[Math.floor((index - 1) /2)]) {
       let oldVal = this._heap[Math.floor((index - 1) /2)];
       this._heap[Math.floor((index - 1) /2)] = value;
@@ -86,6 +86,6 @@ class BinaryHeap {
     return this._heap;
   }
   remove() {
-
+    
   }
 }
