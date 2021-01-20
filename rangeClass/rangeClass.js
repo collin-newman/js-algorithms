@@ -61,9 +61,17 @@ class Range {
     }
   }
   includes(value) {
-    for (let i = 0; i <= this.size(); i++) {
-      if (this.start + (this.step * i) === value) {
-        return true;
+    if (this.end >= this.start) {
+      for (let i = 0; i <= this.size(); i++) {
+        if (this.start + (this.step * i) === value) {
+          return true;
+        }
+      }
+    } else {
+      for (let i = this.size(); i <= 0; i--) {
+        if ((this.end + Math.abs(this.step * i)) === value) {
+          return true;
+        }
       }
     }
     return false;
