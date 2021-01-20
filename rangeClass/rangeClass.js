@@ -41,7 +41,7 @@
 
 
 class Range {
-  constructor(start, end, step = 1) {
+  constructor(start, end = 0, step = 1) {
     this.start = start;
     this.end = end;
     this.step = step;
