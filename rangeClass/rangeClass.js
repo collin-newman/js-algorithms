@@ -41,17 +41,23 @@
 
 
 class Range {
-  constructor(start, end, step) {
+  constructor(start, end, step = 1) {
     this.start = start;
     this.end = end;
     this.step = step;
   }
   size() {
-    return Math.floor((this.end - this.start) / this.step);
+    return Math.abs(Math.floor((this.end - this.start) / this.step));
   }
   each(cb) {
-    for (let i = 0; i <= this.size(); i++) {
-      cb(this.start + (this.step * i));
+    if (this.end >= this.start) {
+      for (let i = 0; i <= this.size(); i++) {
+        cb(this.start + (this.step * i));
+      }
+    } else {
+      for (let i = this.size(); i >= 0; i--) {
+        cb(this.end + (this.step * i));
+      }
     }
   }
   includes(value) {
