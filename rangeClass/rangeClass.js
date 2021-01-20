@@ -56,7 +56,7 @@ class Range {
       }
     } else {
       for (let i = this.size(); i >= 0; i--) {
-        cb(this.end + (this.step * i));
+        cb(this.end + Math.abs(this.step * i));
       }
     }
   }
