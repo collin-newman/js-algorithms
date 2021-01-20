@@ -86,6 +86,10 @@ class BinaryHeap {
     return this._heap;
   }
   remove() {
-    
+    const removed = this._heap.shift();
+    const insert = this._heap.pop();
+    this.insert(insert);
+    console.log(this._heap);
+    return removed;
   }
 }
