@@ -39,17 +39,30 @@
  */
 
 
-var Range = function(start, end, step) {
-};
 
-Range.prototype.size = function () {
-};
+class Range {
+  constructor(start, end, step) {
+    this.start = start;
+    this.end = end;
+    this.step = step;
+  }
+  size() {
+    return Math.floor((this.end - this.start) / this.step);
+  }
+  each(cb) {
+    for (let i = 0; i <= this.size(); i++) {
+      cb(this.start + (this.step * i));
+    }
+  }
+  includes(value) {
+    for (let i = 0; i <= this.size(); i++) {
+      if (this.start + (this.step * i) === value) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
 
-Range.prototype.each = function (callback) {
-};
 
-Range.prototype.includes = function (val) {
-};
-
-var range = new Range(1);
 
