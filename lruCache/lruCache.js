@@ -30,20 +30,44 @@
  * You will need a doubly-linked list (provided).
  */
 
-var LRUCache = function (limit) {
-};
 
-var LRUCacheItem = function (val, key) {
-};
+class LRUCache {
+  constructor(limit) {
+    this.limit = limit;
+    this.cache = {};
+    this.cacheSize = 0;
+    this.usedOrder = new List();
+  }
 
-LRUCache.prototype.size = function () {
-};
+  size() {
+    return Object.keys(this.cache).length;
+  }
 
-LRUCache.prototype.get = function (key) {
-};
+  get(key) {
+    let val = this.cache[key].val;
+    this.usedOrder.moveToFront()
 
-LRUCache.prototype.set = function (key, val) {
-};
+  }
+
+  set(val, key) {
+    if (this.size() >= this.limit) {
+      const removedNode = this.usedOrder.shift();
+      delete this.cache[removedNode];
+    }
+    let listRef = this.usedOrder.push(val);
+    this.cache[key] = {
+      val,
+      listRef,
+    };
+  }
+}
+
+class LRUChacheItem {
+  constructor(val, key) {
+    this.val = val;
+    this.key = key;
+  }
+}
 
 
 
