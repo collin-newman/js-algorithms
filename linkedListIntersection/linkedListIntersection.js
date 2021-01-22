@@ -52,7 +52,7 @@ function linkedListIntersection(list1, list2) {
   }
   //edge case, reverseLinkedList must
   //take in a list of > 1 length
-  if (list1.next === null || list2.next === null) {
+  if (list1.next === null && list2.next === null) {
     if (list1.value !== list2.value) {
       return false;
     }
