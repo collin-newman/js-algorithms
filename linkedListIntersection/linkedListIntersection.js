@@ -44,7 +44,9 @@ function linkedListIntersection(list1, list2) {
       listItems.push(list.value);
       list = list.next;
     }
-    listItems.push(list.value);
+    if (list) {
+      listItems.push(list.value);
+    }
     return listItems.reverse();
   }
   const array1 = reverseLinkedList(list1);
