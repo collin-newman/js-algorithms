@@ -36,7 +36,6 @@ function Node (val) {
 }
 
 
-
 function linkedListIntersection(list1, list2) {
   // TODO: Implement this function!
   const reverseLinkedList = (list) => {
@@ -45,13 +44,14 @@ function linkedListIntersection(list1, list2) {
       listItems.push(list.value);
       list = list.next;
     }
+    listItems.push(list.value);
     return listItems.reverse();
   }
   const array1 = reverseLinkedList(list1);
   const array2 = reverseLinkedList(list2);
   for (let i = 0; i < array1.length; i++) {
     if (array1[i] !== array2[i]) {
-      return array1[i - 1];
+      return array1.slice(0, i).reverse().join('');
     }
   }
   return null;
