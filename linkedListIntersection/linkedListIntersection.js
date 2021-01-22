@@ -54,9 +54,8 @@ function linkedListIntersection(list1, list2) {
   //take in a list of > 1 length
   if (list1.next === null && list2.next === null) {
     if (list1.value !== list2.value) {
-      return false;
+      return null;
     }
-    return true;
   }
   const array1 = reverseLinkedList(list1);
   const array2 = reverseLinkedList(list2);
