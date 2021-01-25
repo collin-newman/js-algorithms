@@ -42,12 +42,19 @@ var translateRomanNumeral = function(romanNumeral) {
     return DIGIT_VALUES[romanNumeral[1]].val - DIGIT_VALUES[romanNumeral[0]].val;
   }
   let previousIndex = 0;
+  let nextToPair = null;
   return romanNumeral.split('').reduce((acc, cur) => {
     if (DIGIT_VALUES[cur].index >= previousIndex) {
+      if (nextToPair) {
+        previousIndex = DIGIT_VALUES[cur];
+        nextToPair = null;
+        return acc += DIGIT_VALUES[cur] - nextToPair.value;
+      }
       previousIndex = DIGIT_VALUES[cur].index;
       return  acc += DIGIT_VALUES[cur].val;
     }
     previousIndex = DIGIT_VALUES[cur].index;
-    return  acc -= DIGIT_VALUES[cur].val;
+    nextToPair = DIGIT_VALUES[cur];
+    return  acc;
   }, 0);
 };
