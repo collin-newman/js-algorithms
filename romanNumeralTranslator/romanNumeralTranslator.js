@@ -18,16 +18,30 @@
  */
 
 var DIGIT_VALUES = {
-  I: 1,
-  V: 5,
-  X: 10,
-  L: 50,
-  C: 100,
-  D: 500,
-  M: 1000
+  I: { val: 1, index: 0 },
+  V: { val: 5, index: 1 },
+  X: { val: 10, index: 2 },
+  L: { val: 50, index: 3 },
+  C: { val: 100, index: 4 },
+  D: { val: 500, index: 5 },
+  M: { val: 10000, index: 6 },
 };
 
 var translateRomanNumeral = function(romanNumeral) {
 // TODO: Implement me!
-
+  if (typeof romanNumeral !== 'string') {
+    return null;
+  }
+  if (romanNumeral.length === 1) {
+    return DIGIT_VALUES[romanNumeral].val;
+  }
+  if (romanNumeral.length === 2) {
+    if (DIGIT_VALUES[romanNumeral[0]].index > DIGIT_VALUES[romanNumeral[1]].index) {
+      return DIGIT_VALUES[romanNumeral[0]].val + DIGIT_VALUES[romanNumeral[1]].val;
+    }
+    return DIGIT_VALUES[romanNumeral[1]].val - DIGIT_VALUES[romanNumeral[0]].val;
+  }
+  return romanNumeral.split('').reduce((acc, cur) => (
+    acc += DIGIT_VALUES[cur].val
+  ), 0);
 };
