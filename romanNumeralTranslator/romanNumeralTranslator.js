@@ -24,7 +24,7 @@ var DIGIT_VALUES = {
   L: { val: 50, index: 3 },
   C: { val: 100, index: 4 },
   D: { val: 500, index: 5 },
-  M: { val: 10000, index: 6 },
+  M: { val: 1000, index: 6 },
 };
 
 var translateRomanNumeral = function(romanNumeral) {
@@ -36,12 +36,18 @@ var translateRomanNumeral = function(romanNumeral) {
     return DIGIT_VALUES[romanNumeral].val;
   }
   if (romanNumeral.length === 2) {
-    if (DIGIT_VALUES[romanNumeral[0]].index > DIGIT_VALUES[romanNumeral[1]].index) {
+    if (DIGIT_VALUES[romanNumeral[0]].index >= DIGIT_VALUES[romanNumeral[1]].index) {
       return DIGIT_VALUES[romanNumeral[0]].val + DIGIT_VALUES[romanNumeral[1]].val;
     }
     return DIGIT_VALUES[romanNumeral[1]].val - DIGIT_VALUES[romanNumeral[0]].val;
   }
-  return romanNumeral.split('').reduce((acc, cur) => (
-    acc += DIGIT_VALUES[cur].val
-  ), 0);
+  let previousIndex = 0;
+  return romanNumeral.split('').reduce((acc, cur) => {
+    if (DIGIT_VALUES[cur].index >= previousIndex) {
+      previousIndex = DIGIT_VALUES[cur].index;
+      return  acc += DIGIT_VALUES[cur].val;
+    }
+    previousIndex = DIGIT_VALUES[cur].index;
+    return  acc -= DIGIT_VALUES[cur].val;
+  }, 0);
 };
