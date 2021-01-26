@@ -10,7 +10,7 @@
 
 var largestProductOfThree = function(array) {
   let sortedArr = array.sort((a, b) => (b - a));
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     if (Math.abs(sortedArr[sortedArr.length -1]) > sortedArr[2]) {
       let deleted = sortedArr.splice(sortedArr.length - 1);
       sortedArr.unshift(Math.abs(deleted[0]));
