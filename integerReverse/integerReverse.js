@@ -13,7 +13,6 @@ function reverseInteger(number){
   // TODO: Implement this function!
   let lastDigit;
   let reverse = 0;
-  let number = number;
 
   while (number > 0) {
     lastDigit = number % 10;
