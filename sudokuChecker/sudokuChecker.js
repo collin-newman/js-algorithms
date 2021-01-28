@@ -66,5 +66,9 @@ function sudokuChecker(board) {
       }
     });
   }
-  return passingBoxes === 9 && passingCols === 9 && passingRows === 9;
+  if (passingBoxes === 9 && passingCols === 9 && passingRows === 9) {
+    return 'solved';
+  } else {
+    return 'invalid';
+  }
 }
