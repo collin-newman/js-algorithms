@@ -22,16 +22,18 @@ Example input:
 
 function sudokuChecker(board) {
   // Your code here.
-  const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const boardData = board.split('\n').filter(item => item !== '');
   for (let i = 0; i < boardData.length; i++) {
     boardData[i] = boardData[i].split('');
   }
 
   const checkNumbers = (row) => {
+    const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     return row.reduce((acc, cur) => {
       console.log(acc)
       if (digits.includes(Number(cur))) {
+        let index = digits.indexOf(Number(cur));
+        digits.splice(index, 1);
         return acc += 1;
       }
     }, 0) === 9;
