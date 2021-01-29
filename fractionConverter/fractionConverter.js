@@ -30,6 +30,11 @@ var toFraction = function(number) {
     return `${num + 1}/5`;
   }
 
+  if (parsedNum === 0.3) {
+    const num = Math.floor(number) * 10;
+    return `${num + 3}/10`;
+  }
+
   if (parsedNum === 0.5) {
     return `${Math.floor(number)}/2`;
   }
