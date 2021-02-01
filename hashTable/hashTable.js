@@ -30,8 +30,10 @@ var makeHashTable = function() {
 
   result.retrieve = function(key) {
     const index = getIndexBelowMaxForKey(key, limit);
-    if (storage[index].length === 1 && storage[index][0] === key) {
-      return storage[index][0][1];
+    if (Array.isArray(storage[index])) {
+      if (storage[index].length === 1 && storage[index][0] === key) {
+        return storage[index][0][1];
+      }
     } else {
       for (let i = 0; i < storage[index].length; i++) {
         if (storage[index][i][0] === key) {
