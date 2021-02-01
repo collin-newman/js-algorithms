@@ -8,7 +8,7 @@ var getIndexBelowMaxForKey = function(str, max) {
   return hash % max;
 };
 
-class HashTable {
+class makeHashTable {
   constructor() {
     this.storage = [];
     this.limit = 4;
