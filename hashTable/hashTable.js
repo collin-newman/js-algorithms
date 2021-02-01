@@ -7,48 +7,49 @@ var getIndexBelowMaxForKey = function(str, max) {
   }
   return hash % max;
 };
+var makeHashTable = function() {
+  var result = {};
+  var storage = [];
+  var limit = 4;
 
-class makeHashTable {
-  constructor() {
-    this.storage = [];
-    this.limit = 4;
-  }
-
-  insert(key, value) {
-    const index = getIndexBelowMaxForKey(key, this.limit);
-    if (!Array.isArray(this.storage[index])) {
-      this.storage[index] = [[key, value]];
+  result.insert = function(key, value) {
+    const index = getIndexBelowMaxForKey(key, limit);
+    if (!Array.isArray(storage[index])) {
+      storage[index] = [[key, value]];
     } else {
-      this.storage[index].push([key, value]);
+      storage[index].push([key, value]);
     }
-    console.log(this.storage);
-  }
+    console.log(storage);
+  };
 
-  retrieve(key) {
-    const index = getIndexBelowMaxForKey(key, this.limit);
-    if (this.storage[index].length === 1 && this.storage[index][0] === key) {
-      return this.storage[index][0][1];
+  result.retrieve = function(key) {
+    const index = getIndexBelowMaxForKey(key, limit);
+    if (storage[index].length === 1 && storage[index][0] === key) {
+      return storage[index][0][1];
     } else {
-      for (let i = 0; i < this.storage[index].length; i++) {
-        if (this.storage[index][i][0] === key) {
-          return this.storage[index][i][1];
+      for (let i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i][1];
+        }
+      }
+    }
+    return null;
+
+  };
+
+  result.remove = function(key) {
+    const index = getIndexBelowMaxForKey(key, limit);
+    if (storage[index].length === 1) {
+     storage[index] = null;
+    } else {
+      for (let i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+         storage[index].splice(i, 1);
         }
       }
     }
     return null;
   }
 
-  remove(key) {
-    const index = getIndexBelowMaxForKey(key, this.limit);
-    if (this.storage[index].length === 1) {
-      this.storage[index] = null;
-    } else {
-      for (let i = 0; i < this.storage[index].length; i++) {
-        if (this.storage[index][i][0] === key) {
-          this.storage[index].splice(i, 1);
-        }
-      }
-    }
-    return null;
-  }
-}
+  return result;
+};
