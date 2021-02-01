@@ -17,6 +17,12 @@ var makeHashTable = function() {
     if (!Array.isArray(storage[index])) {
       storage[index] = [[key, value]];
     } else {
+      for (let i = 0; i < storage[index].length; i++) {
+        if (storage[index][0] === key) {
+          storage[index][1] = value;
+          return;
+        }
+      }
       storage[index].push([key, value]);
     }
     console.log(storage);
