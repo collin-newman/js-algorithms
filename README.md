@@ -68,3 +68,8 @@ local copy. To resolve this problem, run:
 
 Resolve any conflicts, merge, commit and push. You will then be able to submit a
 Pull Request that will get correctly merged.
+
+
+Unfinished:
+
+numberToEnglish

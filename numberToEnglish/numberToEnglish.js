@@ -53,6 +53,31 @@ var numbersToPlace = {
   1000000000000000000: 'quintillion',
 };
 
-Number.prototype.toEnglish = function () {
+Number.prototype.toEnglish = function (num) {
   // return my value as english words
+  if (num < 21 && num > -1) {
+    return numbersToWords[num];
+  }
+
+  const numArray = num.split('');
+  const length = numArray.length - 1;
+  let factor = 10;
+  let resultArr = [];
+
+  for (let i = 0; i < length; i++) {
+    const nextDigit = num % factor;
+    resultArr.push(numbersToWords[nextDigit]);
+    factor *= 10;
+    num = num - nextDigit;
+  }
+
+  const lastDigit = num / factor;
+  let resultStr = `${numbersToWords[lastDigit]} ${numbersToPlace[factor]}`;
+
+  numArray.reverse.forEach(str => {
+    resultStr += ' ';
+    resultStr += str;
+  });
+
+  return resultStr;
 };
