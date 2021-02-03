@@ -59,24 +59,31 @@ Number.prototype.toEnglish = function (num) {
     return numbersToWords[num];
   }
 
-  const numArray = num.split('');
+  const numArray = String(num).split('');
   const length = numArray.length - 1;
   let factor = 10;
   let resultArr = [];
 
   for (let i = 0; i < length; i++) {
     const nextDigit = num % factor;
-    resultArr.push(numbersToWords[nextDigit]);
-    factor *= 10;
     num = num - nextDigit;
+    console.log(nextDigit);
+    resultArr.push(numbersToWords[nextDigit]);
+    if (factor > 10) {
+      resultArr.push(numbersToPlace[factor])
+    }
+    factor *= 10;
   }
-
+  
   const lastDigit = num / factor;
   let resultStr = `${numbersToWords[lastDigit]} ${numbersToPlace[factor]}`;
+  console.log(resultArr);
 
-  numArray.reverse.forEach(str => {
-    resultStr += ' ';
-    resultStr += str;
+  resultArr.reverse().forEach(str => {
+    if (str !== 'zero') {
+      resultStr += ' ';
+      resultStr += str;
+    }
   });
 
   return resultStr;
