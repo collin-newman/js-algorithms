@@ -73,3 +73,4 @@ Pull Request that will get correctly merged.
 Unfinished:
 
 numberToEnglish
+editDistance
