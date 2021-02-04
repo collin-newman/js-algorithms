@@ -7,6 +7,9 @@
 */
 
 var longestPalindrome = function (string) {
+  if (string.length === 0) {
+    return '';
+  }
   const palandromes = [];
   for (let i = 1; i < string.length; i++) {
     let palandrome = [string[i]];
