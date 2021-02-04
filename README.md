@@ -74,4 +74,6 @@ Unfinished:
 
 lrucache
 numberToEnglish
+soduko checker
+fraction converter
 editDistance
