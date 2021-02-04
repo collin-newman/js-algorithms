@@ -72,5 +72,6 @@ Pull Request that will get correctly merged.
 
 Unfinished:
 
+lrucache
 numberToEnglish
 editDistance
