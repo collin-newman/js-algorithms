@@ -17,5 +17,34 @@
 
 var rotatedArraySearch = function (rotated, target) {
   // Your code here:
+  let result = null;
+
+  const findPivot = (array, low, high) => {
+    if (high < low) {
+      return -1;
+    }
+    if (high === low) {
+      return low;
+    }
+
+    const mid = Math.floor((low + high) / 2);
+
+    if (mid < high && array[mid] > array[mid + 1]) {
+      return mid;
+    }
+    if (mid > low && array[mid] < array[mid - 1]) {
+      return mid - 1;
+    }
+    if (array[low] >= array[mid]) {
+      return findPivot(array, low, mid - 1);
+    }
+    return findPivot(array, mid + 1, high);
+  };
+
+  const binarySearch = () => {
+
+  }
+
+  return null;
 };
 
