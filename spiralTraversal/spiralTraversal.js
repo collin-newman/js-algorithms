@@ -69,7 +69,7 @@ var spiralTraversal = function(matrix) {
     upperRow(twoDimArray, acc);
   }
 
-  const finalResult = null;
+  let finalResult = null;
   upperRow(matrix, []);
   return finalResult;
 };
