@@ -16,6 +16,15 @@ spiralTraversal([
 
 
 var spiralTraversal = function(matrix) {
+  // edge cases
+  if (matrix.length === 1) {
+    return matrix[0];
+  }
+  if (matrix.length === 0) {
+    return [];
+  }
+
+
   const upperRow = (twoDimArray, acc) => {
     const result = twoDimArray.splice(0, 1);
     result[0].forEach((item) => acc.push(item));
