@@ -5,12 +5,12 @@
   */
 
 /** example usage:
-  * var grandma = new Tree();
-  * var mom = new Tree();
-  * grandma.addChild(mom);
-  * var me = new Tree();
-  * mom.addChild(me);
-  * grandma.getAncestorPath(me); // => [grandma, mom, me]
+var grandma = new Tree();
+var mom = new Tree();
+grandma.addChild(mom);
+var me = new Tree();
+mom.addChild(me);
+grandma.getAncestorPath(me); // => [grandma, mom, me]
 */
 
 var Tree = function() {
@@ -51,10 +51,28 @@ Tree.prototype.getClosestCommonAncestor = function(/*...*/
   * 3.) me.getAncestorPath(me) -> [me]
   * 4.) grandma.getAncestorPath(H R Giger) -> null
   */
-Tree.prototype.getAncestorPath = function(/*...*/
-) {
-  // TODO: implement me!
+Tree.prototype.getAncestorPath = function(target) {
+  const result = [];
+  let done = false;
+  const checkChild = (tree) => {
+    result.push(tree);
+    if (tree.children.includes(target)) {
+      result.push(target);
+      done = true;
+      return;
+    }
+    for (let i = 0; i < tree.children.length; i++) {
+      checkChild(tree.children[i]);
+      if (done) {
+        break;
+      }
+      result.pop();
+    }
+  }
+  checkChild(this);
+  return result;
 };
+
 
 /**
   * check to see if the provided tree is already a child of this
