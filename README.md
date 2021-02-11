@@ -77,3 +77,5 @@ numberToEnglish
 soduko checker
 fraction converter
 editDistance
+commonAncencestor
+rotateMatrix
