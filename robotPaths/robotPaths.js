@@ -52,22 +52,30 @@ var robotPaths = function(n, board, i, j) {
     }
 
     //try to go up
-    if (!board.hasBeenVisited(i + 1, j)) {
-      findPath(board, i + 1, j);
+    if (board.validPiece(n, i + 1, j)) {
+      if (!board.hasBeenVisited(i + 1, j)) {
+        findPath(board, i + 1, j);
+      }
     }
     //try to go down
-    if (!board.hasBeenVisited(i - 1, j)) {
-      findPath(board, i - 1, j);
+    if (board.validPiece(n, i - 1, j)) {
+      if (!board.hasBeenVisited(i - 1, j)) {
+        findPath(board, i - 1, j);
+      }
     }
     //try to right
-    if (!board.hasBeenVisited(i, j + 1)) {
-      findPath(i, j+ 1);
+    if (board.validPiece(n, i, j + 1)) {
+      if (!board.hasBeenVisited(i, j + 1)) {
+        findPath(board, i, j+ 1);
+      }
     }
     // try to go left
-    if (!board.hasBeenVisited(i, j - 1)) {
-      findPath(i, j - 1);
+    if (board.validPiece(n, i, j - 1)) {
+      if (!board.hasBeenVisited(i, j - 1)) {
+        findPath(board, i, j - 1);
+      }
     }
-
+    return;
   }
 
   findPath(board, i, j);
