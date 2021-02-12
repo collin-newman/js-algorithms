@@ -34,19 +34,37 @@ function countIslands(mapStr) {
     } else {
       down = mapArr[i + 1][j];
     }
+
+    let count = 0;
+
+    if (right === '0') {
+      mapArr[i][j] = '.';
+      count += checkIsland(mapArr, i, j + 1);
+    }
+    if (down === '0') {
+      mapArr[i][j] = '.';
+      count += checkIsland(mapArr, i + 1, j);
+    }
+
     if (left === '.' && right === '.') {
       if (up === '.' && down === '.') {
-        return true;
+        return count;
       }
     }
-    return false;
+    return -1;
   }
 
   for (let i = 0; i < map.length; i++) {
     let land = map[i].indexOf('0');
     console.log(land);
     if (land !== -1) {
-      if (checkIsland(map, i, land)) {
+      let landSize = checkIsland(map, i, land);
+      if (landSize >= 0) {
+        if (landSize > 0) {
+          if (landSize + i < map.length) {
+            i += landSize;
+          }
+        }
         islands++;
       }
     }
