@@ -14,7 +14,38 @@
  */
 
 var longestRun = function (string) {
-  // TODO: Your code here!
+  if (string === '' || typeof string !== 'string') {
+    return null;
+  }
+
+  const streaks = {};
+  const characters = string.split('');
+  let onStreak = false;
+
+  characters.forEach((char, index) => {
+    if (characters[index] === characters[index + 1]) {
+      if (streaks[char] === undefined) {
+        streaks[char] = { count: 2, startIndex: index };
+        onStreak = true;
+      } else {
+        streaks[char].count++;
+      }
+    } else {
+      if (onStreak) {
+        streaks[char].endIndex = index;
+        onStreak = false;
+      }
+    }
+  });
+
+  const streaksArr = [];
+  for (let key in streaks) {
+    streaksArr.push({ char: key, stats: streaks[key]});
+  }
+  const sorted = streaksArr.sort((a, b) => b.stats.count - a.stats.count);
+  const filtered = sorted.filter((streak) => streak.stats.count === sorted[0].stats.count);
+  const sortedByIndex = filtered.sort((a, b) => a.stats.startIndex - b.stats.startIndex);
+  return [sortedByIndex[0].stats.startIndex, sortedByIndex[0].stats.endIndex];
 };
 
 // If you need a random string generator, use this!
