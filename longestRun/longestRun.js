@@ -38,6 +38,11 @@ var longestRun = function (string) {
     }
   });
 
+  // no streaks found in string
+  if (Object.keys(streaks).length === 0) {
+    return [0, 0];
+  }
+
   const streaksArr = [];
   for (let key in streaks) {
     streaksArr.push({ char: key, stats: streaks[key]});
@@ -45,6 +50,7 @@ var longestRun = function (string) {
   const sorted = streaksArr.sort((a, b) => b.stats.count - a.stats.count);
   const filtered = sorted.filter((streak) => streak.stats.count === sorted[0].stats.count);
   const sortedByIndex = filtered.sort((a, b) => a.stats.startIndex - b.stats.startIndex);
+
   return [sortedByIndex[0].stats.startIndex, sortedByIndex[0].stats.endIndex];
 };
 
