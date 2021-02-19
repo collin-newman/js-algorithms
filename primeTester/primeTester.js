@@ -5,6 +5,10 @@
  */
 
 var primeTester = function(n) {
+  // edge cases
+  if n === 1 return false;
+  if n === 2 return true;
+
   if (typeof n !== 'number' || n < 1 || n % 1 !== 0) {
     // n isn't a number or n is less than 1 or n is not an integer
     return false;
