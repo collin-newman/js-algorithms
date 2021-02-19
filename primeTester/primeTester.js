@@ -9,7 +9,17 @@ var primeTester = function(n) {
     // n isn't a number or n is less than 1 or n is not an integer
     return false;
   }
-  // TODO: return true if n is prime, false otherwise
+  // eliminate evens first
+  if (n % 2 === 0) {
+    return false;
+  }
+
+  for (let i = 3; i < Math.floor(Math.sqrt(n)) + 1; i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 };
 
 /* Extra credit: Write a function that generates a list of all prime numbers
