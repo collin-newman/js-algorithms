@@ -26,6 +26,7 @@ class Stack {
     const newStorage = this.storage.splice(0, this.size - 1);
     const poped = this.storage;
     this.storage = newStorage;
+    this.size--;
     return poped[0];
   }
 }
